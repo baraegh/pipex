@@ -6,7 +6,7 @@
 /*   By: eel-ghan <eel-ghan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 18:45:52 by eel-ghan          #+#    #+#             */
-/*   Updated: 2022/03/16 19:02:07 by eel-ghan         ###   ########.fr       */
+/*   Updated: 2022/03/16 21:26:38 by eel-ghan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ char	**ft_freetab(char **ptr, int i)
 	return (NULL);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+int	ft_strlcpy(char *dst, const char *src, int dstsize)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (*(src + i) && i < dstsize - 1 && dstsize > 0)

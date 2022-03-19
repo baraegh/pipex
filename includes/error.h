@@ -6,7 +6,7 @@
 /*   By: eel-ghan <eel-ghan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 23:36:55 by eel-ghan          #+#    #+#             */
-/*   Updated: 2022/03/14 16:50:07 by eel-ghan         ###   ########.fr       */
+/*   Updated: 2022/03/19 00:57:33 by eel-ghan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,13 @@
 # define ERROR_H
 
 # define ERR_USG		"Usage: ./pipex file1 cmd1 cmd2 file2"
+# define ERR_PATH		"Error while parsing the PATH"
+# define ERR_FD_IN		"Error while open the infile"
+# define ERR_FD_OUT		"Error while open the outfile"
+# define ERR_DUP2_IN	"Error: dup2() return -1 while duplicating fd_in"
+# define ERR_DUP2_OUT	"Error: dup2() return -1 while duplicating fd_out"
+# define ERR_JOIN1		"Error while joining path with '/'"
+# define ERR_JOIN2		"Error while joining str with command"
+# define ERR_SPLIT		"Error while spliting cmd"
 
 #endif

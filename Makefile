@@ -6,16 +6,14 @@
 #    By: eel-ghan <eel-ghan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 22:50:15 by eel-ghan          #+#    #+#              #
-#    Updated: 2022/03/16 22:12:37 by eel-ghan         ###   ########.fr        #
+#    Updated: 2022/03/19 00:33:17 by eel-ghan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 
-SRCS =	pipex.c utils.c functions/ft_putstr_fd.c functions/ft_strlen.c \
-		file_check.c functions/ft_split.c functions/ft_calloc.c \
-		functions/ft_strtrim.c functions/ft_strjoin.c get_paths.c \
-		child_one.c
+SRCS =	pipex.c utils.c file_check.c get_paths.c children.c \
+		utils_error.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -25,19 +23,22 @@ CFLAGS = -Wall -Wextra -Werror
 
 RM = @rm -f
 
-${NAME}:	${OBJS}
-			${CC} -o ${NAME} ${OBJS}
-			@tput setaf 2; echo "PIPEX IS READY"
+${NAME}: ${OBJS}
+	@make -C Libft
+	${CC} -o ${NAME} ${OBJS} Libft/libft.a
+	@tput setaf 2; echo "PIPEX IS READY"
 
 all:	${NAME}
 
 clean:
-			${RM} ${OBJS}
-			@tput setaf 1; echo "OBJECTS REMOVED"
+	${RM} ${OBJS}
+	@cd Libft && make clean
+	@tput setaf 1; echo "OBJECTS REMOVED"
 
 fclean:	clean
-			${RM} ${NAME}
-			@tput setaf 1; echo "PIPEX REMOVED"
+	${RM} ${NAME}
+	@cd Libft && rm libft.a
+	@tput setaf 1; echo "PIPEX REMOVED"
 
 re:	fclean all
 

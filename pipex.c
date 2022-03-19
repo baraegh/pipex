@@ -12,30 +12,32 @@
 
 #include "header.h"
 
-void	pipex(char **av, char **paths)
+void	pipex(char **av, char **paths, char **env)
 {
 	int		fd[2];
 	pid_t	child1;
 	pid_t	child2;
-	(void) av;
-	(void) paths;
-	// if (!paths)
-	// 	return
+
+	if (!paths)
+		terminate(ERR_PATH);
 	pipe(fd);
 	child1 = fork();
-	// if (child1 < 0)
-	// 	return
+	if (child1 < 0)
+		return (close_fd(fd));
 	if (child1 == 0)
-		child_one(fd[0], av, paths);
-	child2 = fork();
-	// if (child2 < 0)
-	// 	return
-	if (child2 == 0)
-		child_two(fd[1], av, paths);
+		child_one(fd, av, paths, env);
+	else
+	{
+		child2 = fork();
+		if (child2 < 0)
+			return (close_fd(fd));
+		if (child2 == 0)
+			child_two(fd, av, paths, env);
+	}
 	close(fd[0]);
-	clode(fd[1]);
-	waitpid(child1, NULL, 0);
-	waitpid(child2, NULL, 0);
+	close(fd[1]);
+	free_paths(paths);
+	wait(NULL);
 }
 
 int	main(int ac, char **av, char **env)
@@ -43,7 +45,7 @@ int	main(int ac, char **av, char **env)
 	if (ac == 5)
 	{
 		file_check(av[1], R_OK);
-		pipex(av, get_paths(env));
+		pipex(av, get_paths(env), env);
 	}
 	else
 		terminate(ERR_USG);

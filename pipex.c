@@ -22,6 +22,7 @@ void	pipex(char **av, char **paths, char **env)
 		terminate(ERR_PATH);
 	pipe(fd);
 	child1 = fork();
+	child2 = 0;
 	if (child1 < 0)
 		return (close_fd(fd));
 	if (child1 == 0)
@@ -37,7 +38,9 @@ void	pipex(char **av, char **paths, char **env)
 	close(fd[0]);
 	close(fd[1]);
 	free_paths(paths);
-	wait(NULL);
+	waitpid(child1, NULL, 0);
+	waitpid(child2, NULL, 0);
+	system("leaks pipex");
 }
 
 int	main(int ac, char **av, char **env)

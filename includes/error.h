@@ -6,7 +6,7 @@
 /*   By: eel-ghan <eel-ghan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 23:36:55 by eel-ghan          #+#    #+#             */
-/*   Updated: 2022/03/19 00:57:33 by eel-ghan         ###   ########.fr       */
+/*   Updated: 2022/03/20 19:39:39 by eel-ghan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@
 # define ERR_JOIN1		"Error while joining path with '/'"
 # define ERR_JOIN2		"Error while joining str with command"
 # define ERR_SPLIT		"Error while spliting cmd"
+# define ERR_EXECVE		"Error: execve() return -1"
+# define ERR_TRIM		"Error: ft_strtrim return NULL"
 
 #endif

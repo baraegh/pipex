@@ -6,7 +6,7 @@
 /*   By: eel-ghan <eel-ghan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 23:39:41 by eel-ghan          #+#    #+#             */
-/*   Updated: 2022/03/20 19:41:47 by eel-ghan         ###   ########.fr       */
+/*   Updated: 2022/03/21 18:21:41 by eel-ghan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ char	*remplace_space(char *str)
 
 char	**set_space(char **cmd)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char 	*tmp;
 
 	i = 0;
 	while (cmd[i])
@@ -54,7 +55,9 @@ char	**set_space(char **cmd)
 				j++;
 			}
 			cmd[i][j] = '\0';
-			cmd[i] = ft_strtrim(cmd[i], "'");
+			tmp = cmd[i];
+			cmd[i] = ft_strtrim(tmp, "'");
+			free(tmp);
 			if (!cmd[i])
 				terminate(ERR_TRIM );
 			break ;
@@ -68,18 +71,20 @@ char	**get_cmd(char *path, char *command, char **paths)
 {
 	char	**cmd;
 	char	*str;
+	char	*tmp;
 
 	str = ft_strjoin(path, "/");
 	if (!str)
 	{
-		free_paths(paths);
+		free_arr(paths);
 		terminate(ERR_JOIN1);
 	}
-	str = ft_strjoin(str, command);
+	tmp = str;
+	str = ft_strjoin(tmp, command);
 	if (!str)
 	{
 		free(str);
-		free_paths(paths);
+		free_arr(paths);
 		terminate(ERR_JOIN2);
 	}
 	str = remplace_space(str);
@@ -87,9 +92,11 @@ char	**get_cmd(char *path, char *command, char **paths)
 	if (!cmd)
 	{
 		free(str);
-		free_paths(paths);
+		free_arr(paths);
 		terminate(ERR_SPLIT);
 	}
+	free(tmp);
+	free(str);
 	return (set_space(cmd));
 }
 
@@ -105,10 +112,11 @@ void	execute_cmd(char **paths, char *command, char **env)
 		cmd = get_cmd(paths[i], command, paths);
 		if (access(cmd[0], X_OK) != -1)
 		{
-			free_paths(paths);
+			free_arr(paths);
 			if (execve(cmd[0], cmd, env) == -1)
 				terminate(ERR_EXECVE);
 		}
+		free_arr(cmd);
 		free(cmd);
 		i++;
 	}

@@ -12,7 +12,7 @@
 
 #include "header.h"
 
-void	pipex(char **av, char **paths, char **env)
+void	 pipex(char **av, char **paths, char **env)
 {
 	int		fd[2];
 	pid_t	child1;
@@ -35,20 +35,22 @@ void	pipex(char **av, char **paths, char **env)
 		if (child2 == 0)
 			child_two(fd, av, paths, env);
 	}
-	close(fd[0]);
-	close(fd[1]);
-	free_paths(paths);
+	close_fd(fd);
+	free_arr(paths);
 	waitpid(child1, NULL, 0);
 	waitpid(child2, NULL, 0);
-	system("leaks pipex");
 }
 
 int	main(int ac, char **av, char **env)
 {
+	char	**paths;
+
 	if (ac == 5)
 	{
 		file_check(av[1], R_OK);
-		pipex(av, get_paths(env), env);
+		paths = get_paths(env);
+		pipex(av, paths, env);
+		free(paths);
 	}
 	else
 		terminate(ERR_USG);

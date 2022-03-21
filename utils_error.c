@@ -6,7 +6,7 @@
 /*   By: eel-ghan <eel-ghan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 00:32:45 by eel-ghan          #+#    #+#             */
-/*   Updated: 2022/03/19 00:37:38 by eel-ghan         ###   ########.fr       */
+/*   Updated: 2022/03/21 16:41:35 by eel-ghan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void	close_fd(int *fd)
 	close(fd[1]);
 }
 
-void	free_paths(char **paths)
+void	free_arr(char **arr)
 {
 	int i;
 
-	i = -1;
-	while (paths[i++])
-		free(paths[i]);
+	i = 0;
+	while (arr[i])
+		free(arr[i++]);
 }

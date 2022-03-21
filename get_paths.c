@@ -6,7 +6,7 @@
 /*   By: eel-ghan <eel-ghan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 19:49:44 by eel-ghan          #+#    #+#             */
-/*   Updated: 2022/03/19 00:29:41 by eel-ghan         ###   ########.fr       */
+/*   Updated: 2022/03/21 17:13:57 by eel-ghan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,20 @@ int	is_var_path(char	*s)
 
 char	**get_paths(char **env)
 {
-	int	i;
+	int		i;
+	char	*tmp;
+	char	**paths;
 
 	i = 0;
 	while (env[i])
 	{
 		if (is_var_path(env[i]))
-			return (ft_split(ft_strtrim(env[i], "PATH="), ':'));
+		{
+			tmp = ft_strtrim(env[i], "PATH=");
+			paths = ft_split(tmp, ':');
+			free(tmp);
+			return (paths);
+		}
 		i++;
 	}
 	return (0);

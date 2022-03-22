@@ -6,7 +6,7 @@
 /*   By: eel-ghan <eel-ghan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 23:39:41 by eel-ghan          #+#    #+#             */
-/*   Updated: 2022/03/22 02:08:48 by eel-ghan         ###   ########.fr       */
+/*   Updated: 2022/03/22 19:04:04 by eel-ghan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ void	execute_cmd(char **paths, char *command, char **env)
 		cmd = get_cmd(paths[i], command, paths);
 		if (access(cmd[0], X_OK) != -1)
 		{
-			dprintf(2, "cmd: %s\n", cmd[0]);
 			free_arr(paths);
 			if (execve(cmd[0], cmd, env) == -1)
 				terminate(ERR_EXECVE);

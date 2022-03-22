@@ -6,7 +6,7 @@
 /*   By: eel-ghan <eel-ghan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 22:30:06 by eel-ghan          #+#    #+#             */
-/*   Updated: 2022/03/22 01:46:53 by eel-ghan         ###   ########.fr       */
+/*   Updated: 2022/03/22 14:45:10 by eel-ghan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 #include <fcntl.h>
 # include "includes/error.h"
-# include "Libft/libft.h"
+# include "includes/libft.h"
 # include <stdio.h>
 
 typedef struct s_data

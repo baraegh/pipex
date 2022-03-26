@@ -6,7 +6,7 @@
 /*   By: eel-ghan <eel-ghan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:24:09 by eel-ghan          #+#    #+#             */
-/*   Updated: 2022/03/17 01:12:13 by eel-ghan         ###   ########.fr       */
+/*   Updated: 2022/03/23 15:27:18 by eel-ghan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,4 @@ void	ft_putstr_fd(char *s, int fd)
 	if (!s)
 		return ;
 	write(fd, s, ft_strlen(s));
-	write(fd, "\n", 1);
 }

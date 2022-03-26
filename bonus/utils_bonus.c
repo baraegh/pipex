@@ -6,70 +6,72 @@
 /*   By: eel-ghan <eel-ghan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 23:39:41 by eel-ghan          #+#    #+#             */
-/*   Updated: 2022/03/22 19:04:04 by eel-ghan         ###   ########.fr       */
+/*   Updated: 2022/03/26 23:21:50 by eel-ghan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-char	*remplace_space(char *str)
+t_data	*set_herdoc_cmd_nbr(t_data *data, int ac)
 {
-	int i;
-
-	i = 0;
-	while (str[i])
+	if (!ft_strncmp(data->av[1], "here_doc",
+		ft_strlen("here_doc")))
 	{
-		if (str[i] == '\'')
-		{
-			while (str[i])
-			{
-				if (str[i] == ' ')
-					str[i] = -1;
-				i++;
-				if (str[i] == '\'')
-					break ;
-			}
-			break ;
-		}
-		i++;
+		data->cmd_nbr = ac - 4;
+		data->here_doc = 1;
 	}
-	return (str);
+	else
+	{
+		data->cmd_nbr = ac - 3;
+		data->here_doc = 0;
+	}
+	return (data);
 }
 
-char	**set_space(char **cmd)
+t_data	*set_data(int ac, char **av, char **env)
 {
+	t_data	*data;
 	int		i;
-	int		j;
-	char 	*tmp;
 
+	data = malloc(sizeof(t_data));
+	// if (!data)
+		//
+	data->fd = malloc((ac - 3) * sizeof(int *));
+	if (!data->fd)
+		terminate(ERR_FD);
+	 //free data->fd
 	i = 0;
-	while (cmd[i])
+	while (i < ac - 4)
 	{
-		if (ft_strchr(cmd[i], '\'') != NULL)
-		{
-			j = 0;
-			while (cmd[i][j])
-			{
-				if (cmd[i][j] == -1)
-					cmd[i][j] = ' ';
-				j++;
-			}
-			cmd[i][j] = '\0';
-			tmp = cmd[i];
-			cmd[i] = ft_strtrim(tmp, "'");
-			free(tmp);
-			if (!cmd[i])
-				terminate(ERR_TRIM );
-			break ;
-		}
+		data->fd[i] = malloc(sizeof(int) * 2);
+		// if (!fd[i])
+			//
 		i++;
 	}
-	return (cmd);
+	data->av = av;
+	data->paths = get_paths(env);
+	data->env = env;
+	return (set_herdoc_cmd_nbr(data, ac));
+}
+
+char	**get_cmd_util(char *str, char **paths)
+{
+	char	**cmd;
+
+	str = remplace_space(str);
+	cmd = ft_split(str, ' ');
+	if (!cmd)
+	{
+		free(str);
+		free_arr(paths);
+		terminate(ERR_SPLIT);
+	}
+	free(str);
+	return (set_space(cmd));
 }
 
 char	**get_cmd(char *path, char *command, char **paths)
 {
-	char	**cmd;
 	char	*str;
 	char	*tmp;
 
@@ -87,17 +89,8 @@ char	**get_cmd(char *path, char *command, char **paths)
 		free_arr(paths);
 		terminate(ERR_JOIN2);
 	}
-	str = remplace_space(str);
-	cmd = ft_split(str, ' ');
-	if (!cmd)
-	{
-		free(str);
-		free_arr(paths);
-		terminate(ERR_SPLIT);
-	}
 	free(tmp);
-	free(str);
-	return (set_space(cmd));
+	return (get_cmd_util(str, paths));
 }
 
 void	execute_cmd(char **paths, char *command, char **env)

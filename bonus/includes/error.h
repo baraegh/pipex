@@ -6,7 +6,7 @@
 /*   By: eel-ghan <eel-ghan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 23:36:55 by eel-ghan          #+#    #+#             */
-/*   Updated: 2022/03/23 15:36:42 by eel-ghan         ###   ########.fr       */
+/*   Updated: 2022/03/27 00:41:30 by eel-ghan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,15 @@
 # define ERR_FD_OUT		"Error while open the outfile\n"
 # define ERR_DUP2_IN	"Error: dup2() return -1 while duplicating fd_in\n"
 # define ERR_DUP2_OUT	"Error: dup2() return -1 while duplicating fd_out\n"
+# define ERR_JOIN		"Error return bt ft_strjoin function\n"
 # define ERR_JOIN1		"Error while joining path with '/'\n"
 # define ERR_JOIN2		"Error while joining str with command\n"
 # define ERR_SPLIT		"Error while spliting cmd"
 # define ERR_EXECVE		"Error: execve() return -1\n"
 # define ERR_TRIM		"Error: ft_strtrim return NULL\n"
-# define ERR_FD         "Error while allocating the **fd\n"
+# define ERR_FD			"Error while allocating the **fd\n"
+# define ERR_GNL		"Error return by get_next_line function"
+# define ERR_PIPE		"Error while piping"
+# define ERR_DATA		"Error while allocating data"
+
 #endif

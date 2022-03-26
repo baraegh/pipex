@@ -6,16 +6,20 @@
 /*   By: eel-ghan <eel-ghan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 23:39:41 by eel-ghan          #+#    #+#             */
-/*   Updated: 2022/03/26 23:21:50 by eel-ghan         ###   ########.fr       */
+/*   Updated: 2022/03/27 00:44:16 by eel-ghan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-t_data	*set_herdoc_cmd_nbr(t_data *data, int ac)
+t_data	*set_data_plus(t_data *data, int ac,
+	char **av, char **env)
 {
+	data->av = av;
+	data->paths = get_paths(env);
+	data->env = env;
 	if (!ft_strncmp(data->av[1], "here_doc",
-		ft_strlen("here_doc")))
+			ft_strlen("here_doc")))
 	{
 		data->cmd_nbr = ac - 4;
 		data->here_doc = 1;
@@ -34,24 +38,26 @@ t_data	*set_data(int ac, char **av, char **env)
 	int		i;
 
 	data = malloc(sizeof(t_data));
-	// if (!data)
-		//
+	if (!data)
+		terminate(ERR_DATA);
 	data->fd = malloc((ac - 3) * sizeof(int *));
 	if (!data->fd)
+	{
+		free_arr(data->fd);
 		terminate(ERR_FD);
-	 //free data->fd
+	}
 	i = 0;
 	while (i < ac - 4)
 	{
 		data->fd[i] = malloc(sizeof(int) * 2);
-		// if (!fd[i])
-			//
+		if (!data->fd[i])
+		{
+			free_arr(data->fd);
+			terminate(ERR_FD);
+		}
 		i++;
 	}
-	data->av = av;
-	data->paths = get_paths(env);
-	data->env = env;
-	return (set_herdoc_cmd_nbr(data, ac));
+	return (set_data_plus(data, ac, av, env));
 }
 
 char	**get_cmd_util(char *str, char **paths)

@@ -6,7 +6,7 @@
 /*   By: eel-ghan <eel-ghan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 22:38:55 by eel-ghan          #+#    #+#             */
-/*   Updated: 2022/03/20 23:36:14 by eel-ghan         ###   ########.fr       */
+/*   Updated: 2022/03/27 00:50:08 by eel-ghan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,10 @@
 # include <unistd.h>
 # include <sys/wait.h>
 # include <stdlib.h>
-#include <fcntl.h>
+# include <fcntl.h>
 # include "includes/error.h"
 # include "Libft/libft.h"
-
-/*TO BE DELETED*/
 # include <stdio.h>
-/////////////////
 
 void	terminate(char *msg);
 void	file_check(char	*file_path1, int mode);
@@ -33,5 +30,7 @@ void	child_two(int *fd, char **av, char **paths, char **env);
 void	execute_cmd(char **paths, char *command, char **env);
 void	close_fd(int *fd);
 void	free_arr(char **arr);
+char	**set_space(char **cmd);
+char	*set_space_util(char *cmd);
 
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   children.c                                           :+:      :+:    :+:   */
+/*   children.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eel-ghan <eel-ghan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/17 00:00:47 by eel-ghan          #+#    #+#             */
-/*   Updated: 2022/03/17 00:01:20 by eel-ghan         ###   ########.fr       */
+/*   Created: 2022/03/27 00:45:12 by eel-ghan          #+#    #+#             */
+/*   Updated: 2022/03/27 00:45:46 by eel-ghan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	child_two(int *fd, char **av, char **paths,
 	int		fd_out;
 
 	close(fd[1]);
-	fd_out = open(av[4], O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	fd_out = open(av[4], O_CREAT | O_WRONLY
+			| O_TRUNC, 0644);
 	if (fd_out == -1)
 	{
 		close(fd[0]);

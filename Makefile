@@ -6,13 +6,13 @@
 #    By: eel-ghan <eel-ghan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 22:50:15 by eel-ghan          #+#    #+#              #
-#    Updated: 2022/03/26 23:06:02 by eel-ghan         ###   ########.fr        #
+#    Updated: 2022/03/27 00:46:37 by eel-ghan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 
-SRCS =	pipex.c utils.c file_check.c get_paths.c children.c \
+SRCS =	pipex.c utils.c get_paths.c children.c \
 		utils_error.c
 
 SRCS_BONUS =	bonus/pipex_bonus.c \
@@ -20,7 +20,7 @@ SRCS_BONUS =	bonus/pipex_bonus.c \
 				bonus/utils_bonus.c bonus/utils_error_bonus.c \
 				bonus/get_next_line/get_next_line_utils.c \
 				bonus/get_next_line/get_next_line.c bonus/utils2_bonus.c \
-				bonus/close_utils_bonus.c \
+				bonus/close_utils_bonus.c bonus/error_bonus.c\
 
 OBJS = ${SRCS:.c=.o}
 

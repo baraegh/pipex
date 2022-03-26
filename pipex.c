@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                             :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eel-ghan <eel-ghan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/12 22:47:56 by eel-ghan          #+#    #+#             */
-/*   Updated: 2022/03/12 22:50:04 by eel-ghan         ###   ########.fr       */
+/*   Created: 2022/03/27 00:47:09 by eel-ghan          #+#    #+#             */
+/*   Updated: 2022/03/27 00:47:26 by eel-ghan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	 pipex(char **av, char **paths, char **env)
+void	pipex(char **av, char **paths, char **env)
 {
 	int		fd[2];
 	pid_t	child1;

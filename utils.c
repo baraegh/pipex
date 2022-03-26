@@ -6,7 +6,7 @@
 /*   By: eel-ghan <eel-ghan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 23:39:41 by eel-ghan          #+#    #+#             */
-/*   Updated: 2022/03/21 18:21:41 by eel-ghan         ###   ########.fr       */
+/*   Updated: 2022/03/27 00:51:00 by eel-ghan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*remplace_space(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -36,40 +36,24 @@ char	*remplace_space(char *str)
 	return (str);
 }
 
-char	**set_space(char **cmd)
+char	**get_cmd_util(char *str, char **paths)
 {
-	int		i;
-	int		j;
-	char 	*tmp;
+	char	**cmd;
 
-	i = 0;
-	while (cmd[i])
+	str = remplace_space(str);
+	cmd = ft_split(str, ' ');
+	if (!cmd)
 	{
-		if (ft_strchr(cmd[i], '\'') != NULL)
-		{
-			j = 0;
-			while (cmd[i][j])
-			{
-				if (cmd[i][j] == -1)
-					cmd[i][j] = ' ';
-				j++;
-			}
-			cmd[i][j] = '\0';
-			tmp = cmd[i];
-			cmd[i] = ft_strtrim(tmp, "'");
-			free(tmp);
-			if (!cmd[i])
-				terminate(ERR_TRIM );
-			break ;
-		}
-		i++;
+		free(str);
+		free_arr(paths);
+		terminate(ERR_SPLIT);
 	}
-	return (cmd);
+	free(str);
+	return (set_space(cmd));
 }
 
 char	**get_cmd(char *path, char *command, char **paths)
 {
-	char	**cmd;
 	char	*str;
 	char	*tmp;
 
@@ -87,17 +71,8 @@ char	**get_cmd(char *path, char *command, char **paths)
 		free_arr(paths);
 		terminate(ERR_JOIN2);
 	}
-	str = remplace_space(str);
-	cmd = ft_split(str, ' ');
-	if (!cmd)
-	{
-		free(str);
-		free_arr(paths);
-		terminate(ERR_SPLIT);
-	}
 	free(tmp);
-	free(str);
-	return (set_space(cmd));
+	return (get_cmd_util(str, paths));
 }
 
 void	execute_cmd(char **paths, char *command, char **env)

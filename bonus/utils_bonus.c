@@ -6,7 +6,7 @@
 /*   By: eel-ghan <eel-ghan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 23:39:41 by eel-ghan          #+#    #+#             */
-/*   Updated: 2022/03/27 00:44:16 by eel-ghan         ###   ########.fr       */
+/*   Updated: 2022/03/27 19:51:15 by eel-ghan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_data	*set_data(int ac, char **av, char **env)
 	data->fd = malloc((ac - 3) * sizeof(int *));
 	if (!data->fd)
 	{
-		free_arr(data->fd);
+		free_fd(data);
 		terminate(ERR_FD);
 	}
 	i = 0;
@@ -52,7 +52,7 @@ t_data	*set_data(int ac, char **av, char **env)
 		data->fd[i] = malloc(sizeof(int) * 2);
 		if (!data->fd[i])
 		{
-			free_arr(data->fd);
+			free_fd(data);
 			terminate(ERR_FD);
 		}
 		i++;

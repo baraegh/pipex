@@ -6,7 +6,7 @@
 /*   By: eel-ghan <eel-ghan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 15:49:23 by eel-ghan          #+#    #+#             */
-/*   Updated: 2022/03/27 00:39:55 by eel-ghan         ###   ########.fr       */
+/*   Updated: 2022/03/27 19:52:09 by eel-ghan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,17 @@ char	**set_space(char **cmd)
 		i++;
 	}
 	return (cmd);
+}
+
+void	free_fd(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->cmd_nbr - 1)
+	{
+		free(data->fd[i]);
+		i++;
+	}
+	free(data->fd);
 }

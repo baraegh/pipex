@@ -6,7 +6,7 @@
 /*   By: eel-ghan <eel-ghan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 22:30:06 by eel-ghan          #+#    #+#             */
-/*   Updated: 2022/03/27 00:32:23 by eel-ghan         ###   ########.fr       */
+/*   Updated: 2022/03/27 19:39:40 by eel-ghan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ void	child_three(t_data *data, int i);
 int		here_doc(t_data *data);
 void	here_doc_to_file(t_data *data, int i);
 void	terminate_fd(t_data *data, int i, int j, char *msg);
+void	free_fd(t_data *data);
 
 #endif

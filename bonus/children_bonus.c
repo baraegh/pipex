@@ -6,7 +6,7 @@
 /*   By: eel-ghan <eel-ghan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 00:01:26 by eel-ghan          #+#    #+#             */
-/*   Updated: 2022/03/27 00:29:29 by eel-ghan         ###   ########.fr       */
+/*   Updated: 2022/03/27 19:50:28 by eel-ghan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,14 @@ int	here_doc(t_data *data)
 	{
 		write(1, "heredoc> ", 9);
 		line = get_next_line(STDIN_FILENO);
-		if (line)
+		if (!line)
 			terminate(ERR_GNL);
 		if (!ft_strncmp(tmp, line, ft_strlen(tmp) + 1))
 			break ;
 		write(fd[1], line, ft_strlen(line));
 		free(line);
 	}
+	free(line);
 	free(tmp);
 	close (fd[1]);
 	return (fd[0]);
